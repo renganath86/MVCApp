@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Countries>
+  <Country>
+    <Country_Desc>India</Country_Desc>
+    <Country_Cd>IN</Country_Cd>
+  </Country>
+  <Country>
+    <Country_Desc>United States Of America</Country_Desc>
+    <Country_Cd>USA</Country_Cd>
+  </Country>
+  <Country>
+    <Country_Desc>Malaysia</Country_Desc>
+    <Country_Cd>MY</Country_Cd>
+  </Country>
+  <Country>
+    <Country_Desc>Singapore</Country_Desc>
+    <Country_Cd>SG</Country_Cd>
+  </Country>
+  <Country>
+    <Country_Desc>United Kingdom</Country_Desc>
+    <Country_Cd>UK</Country_Cd>
+  </Country>
+  <Country>
+    <Country_Desc>China</Country_Desc>
+    <Country_Cd>CN</Country_Cd>
+  </Country>
+</Countries>

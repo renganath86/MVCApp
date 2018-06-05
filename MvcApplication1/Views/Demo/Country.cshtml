@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Country</title>
+     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+       @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#drpcountry").change(function () {               
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("Country", "Demo")",
+                    data: "{CountryName:'" + $("#drpcountry").find("option:selected").text() + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    error: function (xhr, err) {
+                    },
+                    success: function (result, status) {
+                        $('#txt_CountryCd').val(result.Value);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container" >
+  <div class="row">
+       <div class="col-sm-4"> 
+             @if (@ViewBag.CountryLst != null)
+                    {
+                        @Html.DropDownList("drpcountry", new SelectList(@ViewBag.CountryLst, "Value", "Text"), "---Select---", new { @id = "drpcountry", @class = "form-control" })
+                    }
+          </div>
+      <div class="col-sm-4">
+           <input class="form-control" type="text" id="txt_CountryCd" placeholder="Country Cd"/>   
+      </div>
+      </div>
+        </div>
+</body>
+</html>

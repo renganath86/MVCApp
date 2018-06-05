@@ -1,0 +1,134 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+       @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(document).ready(function () {                  
+            $("#txt_Date").datepicker({
+                dateFormat: 'dd-M-yy',
+                changeMonth: true
+            });
+
+            $("#drp_pick_from").change(function () {
+                alert("test");
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("Unit", "Demo")",
+                    data: "{Unit:'" + $("#drp_pick_from").val() + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    error: function (xhr, err) {
+                    },
+                    success: function (result, status) {
+                        $('#txt_Pincd').val(result.Value);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+         <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#604A7B;color:White;" role="navigation">
+   <div class="navbar-header col-sm-offset-4">
+      <p class="navbar-brand" style="color:White">Night Drop Request</p>
+   </div>
+   <div class="navbar-right">
+   <div class="form-group">
+       <p class="navbar-text" style="color:White">Signed in as  
+       <label id="lbl_mailid" class="navbar-link" style="color:White"></label>
+       </p>
+      </div>
+   </div>
+</nav>
+</div><br /><br /><br /><br /><br />
+        <div class="container" >
+  <div class="row">
+       <div class="col-md-12 content">
+        <div class="panel panel-default">
+             <div class="panel-body">
+                  <div class="row">            <div class="col-sm-offset-5">               <label class="control-label" id="Label1" for="sm">Night Drop Request Details Form</label>            </div>            </div>
+                     <div class="row">
+           <div class="col-sm-2"> 
+             @if (@ViewBag.nightdrp != null)
+                    {
+                        @Html.DropDownList("drnightdrop", new SelectList(@ViewBag.nightdrp, "Value", "Text"), "---Select---", new { @id = "drpunittype", @class = "form-control" })
+                    }
+          </div>
+                          </div><br />
+                 <div class="row">
+                      <div class="col-sm-2">
+                    <label class="control-label" id="lbl_empid" for="sm">Emp Id</label>
+                    <input class="form-control" type="text" id="txt_EMPID" placeholder="Emp Id"/>                       
+                </div>
+                <div class="col-sm-3">
+                    <label class="control-label" for="sm">Emp Name</label>
+                    <span id="CustNameError" style="color: Red; display: none">*</span>
+                    <input class="form-control" id="txt_EmpName"  placeholder="Emp Name" type="text" value="" />
+                   
+                    <span class="field-validation-valid" data-valmsg-for="CUSTOMER_DESCR" data-valmsg-replace="true"></span>
+                </div>
+                      <div class="col-sm-3">
+                    <label class="control-label" for="sm">Contact Number</label>
+                    <span id="Span3" style="color: Red; display: none">*</span>
+                    <input class="form-control" id="txt_Contact"  placeholder="Contact Number" type="text" value="" />
+                   
+                    <span class="field-validation-valid" data-valmsg-for="txt_Contact" data-valmsg-replace="true"></span>
+                </div>
+                <div class="col-sm-2">
+                    <label class="control-label" for="sm">SBU/Cluster</label>
+                    <span id="ParentCustNameError" style="color: Red; display: none">*</span>                     <input class="form-control" id="txt_SBU_Cluster" placeholder="Search for..." type="text" value="" />
+                </div>                         <div class="col-sm-2">
+                    <label class="control-label" for="sm">Project Code</label>
+                    <input class="form-control" type="text" id="txt_ProjCode" placeholder="Project Code">
+                </div>
+                 </div><br />
+                  <div class="row">       
+                <div class="col-sm-4">
+                    <label class="control-label" for="sm">Project Name</label>
+                    <span id="Span1" style="color: Red; display: none">*</span>
+                    <input class="form-control" id="txt_Pname" placeholder="Project Name" type="text" value="" />
+                   
+                    <span class="field-validation-valid" data-valmsg-for="CUSTOMER_DESCR" data-valmsg-replace="true"></span>
+                </div>
+                <div class="col-sm-2">
+                    <label class="control-label" for="sm">Proj. SBU/Cluster</label>
+                    <span id="Span2" style="color: Red; display: none">*</span>                     <input class="form-control" id="txt_Proj_SBU_CLUST"  placeholder="Proj. SBU/Cluster" type="text" value="" />
+                </div>                 <div class="col-sm-3">
+                    <label class="control-label" for="sm">Project Manager</label>
+                    <span id="Span6" style="color: Red; display: none">*</span>
+                    <input class="form-control" id="txt_PM"  placeholder="Project Manager" type="text" value="" />                  
+                    <span class="field-validation-valid" data-valmsg-for="txt_PM" data-valmsg-replace="true"></span>
+                </div>
+                <div class="col-sm-3">
+                     <label class="control-label" for="sm">Project Director</label>
+                    <span id="Span7" style="color: Red; display: none">*</span>
+                    <input class="form-control" id="txt_PD"  placeholder="Project Director" type="text" value="" />                  
+                    <span class="field-validation-valid" data-valmsg-for="txt_PD" data-valmsg-replace="true"></span>
+                </div>                </div><br />
+                  <div class="row">                <div class="col-sm-2">
+                    <label class="control-label" for="sm">Date</label>
+                    <span id="Span4" style="color: Red; display: none">*</span>                    <input class="form-control" id="txt_Date"  placeholder="Project Manager" type="text" value="" />            
+                </div>         <div class="col-sm-3">
+                    <label class="control-label" for="sm">Pickup From</label>                   @if (@ViewBag.pickupdrp != null)
+                    {
+                        @Html.DropDownList("drp_pick_from", new SelectList(@ViewBag.pickupdrp, "Value", "Text"), "---Select---", new { @id = "drp_pick_from", @class = "form-control" })
+                    }                                                                </div>                                 <div class="col-sm-2">                    <label class="control-label" for="sm">Destination</label>                    <span id="Span5" style="color: Red; display: none">*</span>                    <input class="form-control" id="txtDestination"  placeholder="Destination" type="text" value="" />                    <span class="field-validation-valid" data-valmsg-for="txtDestination" data-valmsg-replace="true"></span>                </div>                  <div class="col-sm-2">                 <label class="col-sm-2 control-label" style="width:100%" for="selectbasic">Pin Code</label>                   <input class="form-control" id="txt_Pincd"  placeholder="Pin Code" type="text" value="" />                    </div>                </div><br />
+
+            </div>
+           </div>
+      </div>
+            </div>
+</body>
+</html>
